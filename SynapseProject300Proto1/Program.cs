@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using SynapseProject300Proto1.Controllers.Model;
+
 namespace SynapseProject300Proto1
 {
     public class Program
@@ -13,6 +16,9 @@ namespace SynapseProject300Proto1
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<SynapseDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
