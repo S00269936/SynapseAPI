@@ -1,0 +1,6 @@
+@SynapseProject300Proto1_HostAddress = http://localhost:5053
+
+GET {{SynapseProject300Proto1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
