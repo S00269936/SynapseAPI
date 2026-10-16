@@ -45,6 +45,33 @@ namespace SynapseProject300Proto1.Controllers
             }
             return Ok(note); //returns a 200 (success) and the note
         }
+
+        [HttpPut("{id}")] //updates by id
+        public async Task<IActionResult> UpdateNote(int id, Note updatedNote)
+        {
+            var note = await _context.Notes.FindAsync(id);
+            if (note == null)
+            {
+                return NotFound(); //returns a 404 (not found)
+            }
+            note.Title = updatedNote.Title;
+            note.Content = updatedNote.Content;
+            await _context.SaveChangesAsync();
+            return NoContent(); //returns a 204 (success) with no content
+        }
+
+        [HttpDelete("{id}")] //deletes by id
+        public async Task<IActionResult> DeleteNote(int id)
+        {
+            var note = await _context.Notes.FindAsync(id);
+            if (note == null)
+            {
+                return NotFound(); //returns a 404 (not found)
+            }
+            _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
+            return NoContent(); //returns a 204 (success) with no content
+        }
         #endregion
     }
 }
