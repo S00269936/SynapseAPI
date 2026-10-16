@@ -25,6 +25,26 @@ namespace SynapseProject300Proto1.Controllers
             //_context.Notes is a DbSet<Note> representing the Notes table in the database
         }
 
+        [HttpPost] //posts
+        public async Task<ActionResult<Note>> CreateNote(Note note)
+        {
+            _context.Notes.Add(note); 
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetNoteById), new { id = note.Id }, note);
+            //returns a 201 (success) and location of note
+        }
+
+        [HttpGet("{id}")] //gets by id
+        public async Task<ActionResult<Note>> GetNoteById(int id)
+        {
+            var note = await _context.Notes.FindAsync(id);
+            if (note == null)
+            {
+                return NotFound(); 
+                //returns a 404 (not found)
+            }
+            return Ok(note); //returns a 200 (success) and the note
+        }
         #endregion
     }
 }
