@@ -2,9 +2,15 @@
 {
     public class Note
     {
-        public int Id { get; set; }
+        //Same table data as Corhy's SQL tables
+        public long NoteId { get; set; }
+        public int VaultId { get; set; }
+        public int? FolderId { get; set; }
         public required string Title { get; set; }
-        public required string Content { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string? Content { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public bool? IsDeleted { get; set; }
+        public string? Keys { get; set; }
     }
 }

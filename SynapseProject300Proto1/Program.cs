@@ -18,7 +18,7 @@ namespace SynapseProject300Proto1
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<SynapseDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Configuration.GetConnectionString("SynapseConnection")));
 
             //CORS
             builder.Services.AddCors(options =>
@@ -30,6 +30,19 @@ namespace SynapseProject300Proto1
             });
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<SynapseDbContext>();
+
+                if (db.Database.CanConnect())
+                {
+                    Console.WriteLine("Successfully connected to Synapse SQL Server!");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to connect to Synapse SQL Server.");
+                }
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -28,26 +28,25 @@ namespace SynapseProject300Proto1.Controllers
         [HttpPost] //posts
         public async Task<ActionResult<Note>> CreateNote(Note note)
         {
-            _context.Notes.Add(note); 
+            _context.Notes.Add(note);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetNoteById), new { id = note.Id }, note);
-            //returns a 201 (success) and location of note
+            return CreatedAtAction(nameof(GetNoteById), new { id = note.NoteId }, note);
         }
 
         [HttpGet("{id}")] //gets by id
-        public async Task<ActionResult<Note>> GetNoteById(int id)
+        public async Task<ActionResult<Note>> GetNoteById(long id)
         {
             var note = await _context.Notes.FindAsync(id);
             if (note == null)
             {
-                return NotFound(); 
+                return NotFound();
                 //returns a 404 (not found)
             }
             return Ok(note); //returns a 200 (success) and the note
         }
 
         [HttpPut("{id}")] //updates by id
-        public async Task<IActionResult> UpdateNote(int id, Note updatedNote)
+        public async Task<IActionResult> UpdateNote(long id, Note updatedNote)
         {
             var note = await _context.Notes.FindAsync(id);
             if (note == null)
@@ -61,7 +60,7 @@ namespace SynapseProject300Proto1.Controllers
         }
 
         [HttpDelete("{id}")] //deletes by id
-        public async Task<IActionResult> DeleteNote(int id)
+        public async Task<IActionResult> DeleteNote(long id)
         {
             var note = await _context.Notes.FindAsync(id);
             if (note == null)
