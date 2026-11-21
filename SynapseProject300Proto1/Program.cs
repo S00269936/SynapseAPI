@@ -34,14 +34,9 @@ namespace SynapseProject300Proto1
             {
                 var db = scope.ServiceProvider.GetRequiredService<SynapseDbContext>();
 
-                if (db.Database.CanConnect())
-                {
-                    Console.WriteLine("Successfully connected to Synapse SQL Server!");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to connect to Synapse SQL Server.");
-                }
+                Console.WriteLine("Database: " + db.Database.GetDbConnection().Database);
+                Console.WriteLine("Server: " + db.Database.GetDbConnection().DataSource);
+                Console.WriteLine("Vault Count: " + db.Vaults.Count());
             }
 
             // Configure the HTTP request pipeline.

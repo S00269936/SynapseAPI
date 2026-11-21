@@ -11,7 +11,9 @@ namespace SynapseProject300Proto1.Controllers.Model
         }
 
         public DbSet<Note> Notes { get; set; }
-        //Folders, tags, users etc
+        public DbSet<Vault> Vaults { get; set; }
+        public DbSet<Folder> Folders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,7 +22,17 @@ namespace SynapseProject300Proto1.Controllers.Model
                 entity.ToTable("Notes");
                 entity.HasKey(n => n.NoteId);
             });
+            modelBuilder.Entity<Vault>(entity =>
+            {
+                entity.ToTable("Vaults");
+                entity.HasKey(v => v.VaultId);
+            });
+            modelBuilder.Entity<Folder>(entity =>
+            {
+                entity.ToTable("Folder");
+                entity.HasKey(f => f.FolderId);
+            });
         }
-        //Use Note table usaing NoteID
+        //Use x table usaing xID (e.g Note Table with NoteID)
     }
 }
