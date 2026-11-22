@@ -39,12 +39,9 @@ namespace SynapseProject300Proto1
                 Console.WriteLine("Vault Count: " + db.Vaults.Count());
             }
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //Swagger - enabled for testing on EC2
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             //app.UseHttpsRedirection();
             //commented out to use http for prototype
