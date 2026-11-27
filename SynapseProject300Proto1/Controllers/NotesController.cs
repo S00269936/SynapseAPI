@@ -55,6 +55,7 @@ namespace SynapseProject300Proto1.Controllers
             }
             note.Title = updatedNote.Title;
             note.Content = updatedNote.Content;
+            note.Keys = updatedNote.Keys;
             await _context.SaveChangesAsync();
             return NoContent(); //returns a 204 (success) with no content
         }
